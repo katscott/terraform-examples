@@ -1,0 +1,3 @@
+module "elk" {
+  source = "./elk"
+}

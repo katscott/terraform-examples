@@ -12,7 +12,7 @@ resource "kubernetes_pod" "nginx" {
     labels = {
       App = "nginx"
     }
-    namespace = "${kubernetes_namespace.namespace.metadata.0.name}"
+    namespace = kubernetes_namespace.namespace.metadata.0.name
   }
 
   spec {
@@ -30,11 +30,11 @@ resource "kubernetes_pod" "nginx" {
 resource "kubernetes_service" "nginx" {
   metadata {
     name      = "nginx"
-    namespace = "${kubernetes_namespace.namespace.metadata.0.name}"
+    namespace = kubernetes_namespace.namespace.metadata.0.name
   }
   spec {
     selector = {
-      App = "${kubernetes_pod.nginx.metadata.0.labels.App}"
+      App = kubernetes_pod.nginx.metadata.0.labels.App
     }
     port {
       port        = 80 #the external port to use
